@@ -1,4 +1,4 @@
-# SVProgressHUD for Xamarin.iOS
+# SVProgressHUD for Xamarin.iOS/.NET for iOS
 
 [![NuGet version](https://badge.fury.io/nu/SVProgressHUD.svg)](https://badge.fury.io/nu/SVProgressHUD)
 
@@ -20,7 +20,7 @@ Try `SVProgressHUD` on [Appetize.io](https://appetize.io/app/p8r2cvy8kq74x7q7tjq
 ## Build
 
 * `make`
-* Output: `build/SVProgressHUD.dll`
+* Output: `build/net6.0-ios/SVProgressHUD.dll` and `build/xamarin.ios10/SVProgressHUD.dll`
 
 ## Publish new version to Nuget
 

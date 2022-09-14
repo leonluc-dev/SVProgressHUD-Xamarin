@@ -1,14 +1,38 @@
-<Project Sdk="Xamarin.Legacy.Sdk">
+﻿<Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>xamarin.ios10;net6.0-ios</TargetFrameworks>
+    <TargetFrameworks>net6.0-ios;xamarin.ios10</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
+    <SupportedOSPlatform>ios10.0</SupportedOSPlatform>
     <RootNamespace>SVProgressHUDBinding</RootNamespace>
+
+    <!--Nuget info-->
+    <PackageId>SVProgressHUD</PackageId>
+    <Version>2.2.5</Version>
+    <Title>SVProgressHUD</Title>
+    <Authors>Tri Nguyen</Authors>
+    <Owners>Tobias Tiemerding</Owners>
+    <LicenseUrl>https://github.com/trinnguyen/SVProgressHUD-Xamarin/blob/master/LICENSE</LicenseUrl>
+    <ProjectUrl>https://github.com/trinnguyen/SVProgressHUD-Xamarin</ProjectUrl>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Description>SVProgressHUD is a clean and easy-to-use HUD meant to display the progress of an ongoing task on iOS and tvOS.</Description>
+    <Copyright>Copyright 2018 - 2022</Copyright>
+    <Tags>xamarin ios SVProgressHUD hud</Tags>
   </PropertyGroup>
+
+  <ItemGroup Condition=" $(TargetFramework) == 'xamarin.ios10' ">
+    <!--Explicitly exclude these files if targeting Xamarin.iOS legacy-->
+    <Compile Remove="ApiDefinitions.cs" />
+    <Compile Remove="StructsAndEnums.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <NativeReference Include="libSVProgressHUD.a">
       <Kind>Static</Kind>
       <SmartLink>true</SmartLink>
@@ -16,10 +40,4 @@
       <Frameworks>QuartzCore</Frameworks>
     </NativeReference>
   </ItemGroup>
-
-  <ItemGroup>
-      <Folder Include="Resources\" />
-      <Folder Include="Resources\SVProgressHUD.bundle\" />
-  </ItemGroup>
-
 </Project>

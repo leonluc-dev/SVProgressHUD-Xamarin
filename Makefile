@@ -22,7 +22,8 @@ msbuild:
 	dotnet build --configuration Release
 	rm -rf build
 	mkdir build
-	cp bin/Release/$(DLL_NAME) build/$(DLL_NAME)
+	cp bin/Release/net6.0-ios/$(DLL_NAME) build/net6.0-ios/$(DLL_NAME)
+	cp bin/Release/xamarin.ios10/$(DLL_NAME) build/xamarin.ios10/$(DLL_NAME)
 	
 clean:
 	rm -rf bin obj $(SRC_FOLDER) Resources *.a
@@ -31,5 +32,5 @@ clean-all:
 	rm -rf build *.nupkg
 
 nuget:
-	dotnet pack
-	nuget push SVProgressHUD.$(NATIVE_RELEASE).nupkg -Source nuget.org
+	dotnet pack --configuration Release
+	dotnet nuget push SVProgressHUD.$(NATIVE_RELEASE).nupkg -Source nuget.org
