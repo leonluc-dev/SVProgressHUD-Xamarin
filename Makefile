@@ -1,5 +1,5 @@
 MSBUILD=/Library/Frameworks/Mono.framework/Commands/xbuild
-SDK=11.4
+SDK=15.5
 SRC_FOLDER=SVProgressHUD-Xcode
 PROJ_NAME=SVProgressHUD.xcodeproj
 DLL_NAME=SVProgressHUD.dll
@@ -12,14 +12,14 @@ prepare:
 	curl -L https://github.com/SVProgressHUD/SVProgressHUD/archive/$(NATIVE_RELEASE).zip | tar xz
 
 xcodebuild:
-	xcodebuild -project $(SRC_FOLDER)/$(PROJ_NAME) build -target SVProgressHUD -sdk iphonesimulator$(SDK) IPHONEOS_DEPLOYMENT_TARGET=7.0
+	xcodebuild -project $(SRC_FOLDER)/$(PROJ_NAME) build -target SVProgressHUD -sdk iphonesimulator$(SDK) IPHONEOS_DEPLOYMENT_TARGET=7.0 EXCLUDED_ARCHS="arm64"
 	xcodebuild -project $(SRC_FOLDER)/$(PROJ_NAME) build -target SVProgressHUD -sdk iphoneos$(SDK) IPHONEOS_DEPLOYMENT_TARGET=7.0
 	lipo -create $(SRC_FOLDER)/build/Release-iphoneos/libSVProgressHUD.a $(SRC_FOLDER)/build/Release-iphonesimulator/libSVProgressHUD.a -output libSVProgressHUD.a
 	mkdir Resources
 	cp -r $(SRC_FOLDER)/SVProgressHUD/SVProgressHUD.bundle Resources/SVProgressHUD.bundle
 	
 msbuild:
-	msbuild /p:Configuration=Release
+	dotnet build --configuration Release
 	rm -rf build
 	mkdir build
 	cp bin/Release/$(DLL_NAME) build/$(DLL_NAME)
@@ -31,5 +31,5 @@ clean-all:
 	rm -rf build *.nupkg
 
 nuget:
-	nuget pack SVProgressHUD.nuspec
+	dotnet pack
 	nuget push SVProgressHUD.$(NATIVE_RELEASE).nupkg -Source nuget.org

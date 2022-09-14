@@ -1,4 +1,4 @@
-﻿<Project Sdk="Xamarin.Legacy.Sdk">
+<Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup>
     <TargetFrameworks>xamarin.ios10;net6.0-ios</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -7,30 +7,19 @@
     <RootNamespace>SVProgressHUDBinding</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-    <ObjcBindingNativeLibrary Include="libSVProgressHUD.a" />
-    <Compile Include="libSVProgressHUD.linkwith.cs">
-        <DependentUpon>libSVProgressHUD.a</DependentUpon>
-    </Compile>
+    <NativeReference Include="libSVProgressHUD.a">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+      <Frameworks>QuartzCore</Frameworks>
+    </NativeReference>
   </ItemGroup>
 
   <ItemGroup>
       <Folder Include="Resources\" />
       <Folder Include="Resources\SVProgressHUD.bundle\" />
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SVProgressHUD.bundle\angle-mask.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\angle-mask%402x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\angle-mask%403x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\error.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\error%402x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\error%403x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\info.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\info%402x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\info%403x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\success.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\success%402x.png" />
-    <BundleResource Include="Resources\SVProgressHUD.bundle\success%403x.png" />
-  </ItemGroup>
+
 </Project>
